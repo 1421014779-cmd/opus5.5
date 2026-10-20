@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>密语盒 宣传视频（Motion 版）</title>
+<style>
+  :root {
+    --bg1: #0b1426;
+    --bg2: #12264a;
+    --blue: #2aabee;
+    --blue2: #229ed9;
+    --text: #f4f7fb;
+    --muted: #9fb2cc;
+    --red: #ff5a6a;
+    --green: #3ddc97;
+    --card: rgba(255,255,255,0.06);
+    --line: rgba(255,255,255,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg1); }
+  body { font-family: "WenQuanYi Zen Hei", "DejaVu Sans", sans-serif; color: var(--text); }
+  #stage {
+    position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(1200px 900px at 50% 30%, var(--bg2), var(--bg1) 70%);
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .center { position: absolute; left: 0; right: 0; text-align: center; }
+  .h1 { font-size: 92px; font-weight: bold; letter-spacing: 4px; line-height: 1.25; }
+  .h2 { font-size: 64px; font-weight: bold; letter-spacing: 2px; line-height: 1.3; }
+  .h3 { font-size: 46px; color: var(--muted); letter-spacing: 2px; }
+  .blue { color: var(--blue); }
+  .red { color: var(--red); }
+
+  /* S1 obstacle cards */
+  .obst {
+    position: absolute; left: 190px; width: 700px; height: 150px; border-radius: 32px;
+    background: var(--card); border: 2px solid var(--line);
+    display: flex; align-items: center; gap: 36px; padding: 0 48px; font-size: 54px;
+  }
+  .obst .ic { width: 80px; height: 80px; border-radius: 22px; background: rgba(42,171,238,.18); display: grid; place-items: center; }
+  .obst .x { margin-left: auto; width: 80px; height: 80px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+  .strike { position: absolute; left: 30px; right: 30px; top: 50%; height: 6px; background: var(--red); border-radius: 3px; transform-origin: left center; }
+
+  /* S2 people dots */
+  #dots { position: absolute; left: 140px; top: 760px; width: 800px; height: 640px; }
+  .dot { position: absolute; width: 96px; height: 96px; }
+
+  /* logo */
+  .logo {
+    width: 260px; height: 260px; border-radius: 70px; margin: 0 auto;
+    background: linear-gradient(145deg, #37bbfe, #1d8fd0);
+    display: grid; place-items: center;
+    box-shadow: 0 30px 120px rgba(42,171,238,.55);
+  }
+  .chips { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .chip {
+    font-size: 44px; padding: 18px 40px; border-radius: 999px;
+    background: rgba(42,171,238,.16); border: 2px solid rgba(42,171,238,.55); color: #d8f0ff;
+  }
+
+  /* phone */
+  .phone {
+    position: absolute; left: 190px; width: 700px; height: 1180px; border-radius: 90px;
+    background: #05090f; padding: 26px; box-shadow: 0 40px 140px rgba(0,0,0,.6), 0 0 0 4px #24324a;
+  }
+  .screen { width: 100%; height: 100%; border-radius: 66px; overflow: hidden; position: relative; background: #eef2f6; color: #10202e; }
+  .urlbar {
+    height: 150px; background: #fff; display: flex; align-items: flex-end; padding: 0 34px 22px;
+    border-bottom: 1px solid #dde3ea;
+  }
+  .url { flex: 1; height: 64px; border-radius: 32px; background: #eef1f5; font-size: 30px; color: #4d5b6b; display: flex; align-items: center; gap: 12px; padding: 0 26px; }
+  .chathead { height: 120px; background: var(--blue); color: #fff; display: flex; align-items: center; gap: 22px; padding: 0 30px; }
+  .avatar { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; font-size: 34px; color: #fff; flex: none; }
+  .msgs { position: absolute; top: 270px; left: 0; right: 0; bottom: 130px; padding: 30px; }
+  .bubble { max-width: 78%; font-size: 36px; line-height: 1.4; padding: 22px 30px; border-radius: 34px; margin-bottom: 26px; position: relative; }
+  .bubble.me { margin-left: auto; background: #e1fec6; border-bottom-right-radius: 10px; }
+  .bubble.them { background: #fff; border-bottom-left-radius: 10px; }
+  .bubble .tm { font-size: 22px; color: #7a8a99; margin-top: 6px; text-align: right; }
+  .inputbar { position: absolute; left: 0; right: 0; bottom: 0; height: 130px; background: #fff; border-top: 1px solid #dde3ea; display: flex; align-items: center; gap: 20px; padding: 0 30px; }
+  .inputbox { flex: 1; height: 76px; border-radius: 38px; background: #f0f3f6; font-size: 32px; color: #8a97a5; display: flex; align-items: center; padding: 0 30px; }
+  .send { width: 76px; height: 76px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; }
+
+  .qrcard { position: absolute; left: 290px; width: 500px; height: 600px; border-radius: 44px; background: #fff; padding: 50px; color: #10202e; text-align: center; }
+  .scanline { position: absolute; left: 30px; right: 30px; height: 8px; background: var(--blue); box-shadow: 0 0 40px 10px rgba(42,171,238,.6); border-radius: 4px; }
+
+  /* admin list */
+  .list { position: absolute; top: 270px; left: 0; right: 0; bottom: 0; background: #fff; }
+  .row { position: absolute; left: 0; right: 0; height: 150px; display: flex; align-items: center; gap: 24px; padding: 0 30px; border-bottom: 1px solid #edf0f3; background: #fff; }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .name { font-size: 36px; font-weight: bold; display: flex; justify-content: space-between; }
+  .row .name span { font-size: 26px; color: #8a97a5; font-weight: normal; }
+  .row .prev { font-size: 30px; color: #6b7a89; margin-top: 8px; display: flex; justify-content: space-between; white-space: nowrap; }
+  .badge { min-width: 50px; height: 50px; border-radius: 25px; background: var(--blue); color: #fff; font-size: 28px; display: grid; place-items: center; padding: 0 14px; }
+  .tag { font-size: 22px; color: var(--blue2); background: #e4f4fd; border-radius: 10px; padding: 2px 12px; margin-left: 12px; font-weight: normal; }
+  .adminhead { height: 120px; background: #fff; display: flex; align-items: center; gap: 22px; padding: 0 34px; font-size: 40px; font-weight: bold; border-bottom: 1px solid #dde3ea; }
+  .search { height: 64px; margin: 0 30px; border-radius: 32px; background: #eef1f5; font-size: 28px; color: #8a97a5; display: flex; align-items: center; padding: 0 26px; }
+
+  /* features */
+  .feat {
+    position: absolute; width: 440px; height: 330px; border-radius: 40px;
+    background: var(--card); border: 2px solid var(--line); padding: 40px;
+  }
+  .feat .fi { width: 96px; height: 96px; border-radius: 28px; background: rgba(42,171,238,.18); display: grid; place-items: center; margin-bottom: 26px; }
+  .feat .ft { font-size: 46px; font-weight: bold; margin-bottom: 14px; }
+  .feat .fd { font-size: 32px; color: var(--muted); line-height: 1.4; }
+
+  .usecase { position: absolute; font-size: 50px; padding: 26px 48px; border-radius: 999px; background: var(--card); border: 2px solid var(--line); white-space: nowrap; }
+
+  .caption-top { position: absolute; top: 150px; left: 60px; right: 60px; text-align: center; }
+  .stepnum { display: inline-block; font-size: 34px; color: var(--blue); border: 2px solid var(--blue); border-radius: 999px; padding: 8px 30px; margin-bottom: 22px; letter-spacing: 4px; }
+
+  .cta {
+    display: inline-block; font-size: 52px; font-weight: bold; padding: 34px 80px; border-radius: 999px;
+    background: linear-gradient(135deg, #37bbfe, #1d8fd0); box-shadow: 0 20px 80px rgba(42,171,238,.5);
+  }
+  .fine { font-size: 28px; color: #6f84a3; }
+  #progress { position: absolute; left: 0; bottom: 0; height: 8px; background: var(--blue); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="orb" id="orb1" style="width:700px;height:700px;background:#2aabee;left:-200px;top:200px"></div>
+  <div class="orb" id="orb2" style="width:600px;height:600px;background:#6c5ce7;right:-200px;top:1200px"></div>
+
+  <!-- S1: hook -->
+  <section class="scene" id="s1">
+    <div class="center h1" id="s1a" style="top:300px">客户想找你聊</div>
+    <div class="center h1" id="s1b" style="top:420px">却卡在了<span class="red">第一步</span></div>
+    <div class="obst" id="ob1" style="top:700px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg></div>
+      下载 App<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="obst" id="ob2" style="top:890px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div>
+      注册账号<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="obst" id="ob3" style="top:1080px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+      绑定手机号<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="center h2" id="s1c" style="top:1400px">每多一道门槛<br><span class="blue">就有客户悄悄离开</span></div>
+  </section>
+
+  <!-- S2: people leaving -->
+  <section class="scene" id="s2">
+    <div class="center h2" style="top:380px">访客犹豫的那几秒</div>
+    <div class="center h3" style="top:480px">一笔生意，就这样溜走了</div>
+    <div id="dots"></div>
+    <div class="center h2" id="s2c" style="top:1500px">能不能<span class="blue">扫一下就聊</span>？</div>
+  </section>
+
+  <!-- S3: reveal -->
+  <section class="scene" id="s3">
+    <div class="center" id="s3logo" style="top:520px">
+      <div class="logo">
+        <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01" stroke-width="2.8"/>
+        </svg>
+      </div>
+    </div>
+    <div class="center h1" id="s3name" style="top:850px;font-size:120px;letter-spacing:16px">密语盒</div>
+    <div class="center h3" id="s3en" style="top:1010px;letter-spacing:10px">WHISPERBOX</div>
+    <div class="center h2" id="s3tag" style="top:1170px;font-size:56px">自部署的匿名网页接待系统</div>
+    <div class="chips center" id="s3chips" style="top:1320px">
+      <div class="chip">扫码即聊</div><div class="chip">无需安装</div><div class="chip">无需注册</div>
+    </div>
+  </section>
+
+  <!-- S4: visitor side -->
+  <section class="scene" id="s4">
+    <div class="caption-top">
+      <div class="stepnum">访客端</div>
+      <div class="h2" style="font-size:58px">扫码 / 点链接<br>打开网页<span class="blue">直接聊</span></div>
+    </div>
+    <div class="qrcard" id="qrcard" style="top:620px">
+      <canvas id="qr" width="400" height="400" style="width:400px;height:400px"></canvas>
+      <div style="font-size:36px;margin-top:20px;font-weight:bold">扫一扫 · 立即咨询</div>
+      <div class="scanline" id="scanline" style="top:60px"></div>
+    </div>
+    <div class="phone" id="vphone" style="top:480px">
+      <div class="screen">
+        <div class="urlbar"><div class="url">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2fa36b" stroke-width="2.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+          https://你的域名/chat</div></div>
+        <div class="chathead">
+          <div class="avatar" style="background:rgba(255,255,255,.25)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+          </div>
+          <div><div style="font-size:36px;font-weight:bold">在线咨询</div><div style="font-size:26px;opacity:.85">通常几分钟内回复</div></div>
+        </div>
+        <div class="msgs">
+          <div style="text-align:center;font-size:24px;color:#8a97a5;margin-bottom:26px">无需登录 · 已为你创建匿名会话</div>
+          <div class="bubble me" id="vm1">你好，想咨询一下服务价格<div class="tm">10:21 ✓✓</div></div>
+          <div class="bubble them" id="vm2">您好！很高兴为您服务～请问您想了解哪一项？<div class="tm">10:21</div></div>
+          <div class="bubble me" id="vm3">不用下载 App，真方便！<div class="tm">10:22 ✓✓</div></div>
+        </div>
+        <div class="inputbar"><div class="inputbox" id="vtyping">输入消息…</div>
+          <div class="send"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></div></div>
+      </div>
+    </div>
+    <div class="chips center" id="s4chips" style="top:1715px">
+      <div class="chip">免安装</div><div class="chip">免注册</div><div class="chip">匿名</div>
+    </div>
+  </section>
+
+  <!-- S5: admin side -->
+  <section class="scene" id="s5">
+    <div class="caption-top">
+      <div class="stepnum">管理端</div>
+      <div class="h2" style="font-size:58px">像 Telegram 一样的<span class="blue">会话列表</span><br>每位访客，一个独立对话</div>
+    </div>
+    <div class="phone" id="aphone" style="top:480px">
+      <div class="screen" style="background:#fff">
+        <div style="height:150px;display:flex;align-items:flex-end;padding:0 34px 18px">
+          <div class="search" style="margin:0;flex:1">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a97a5" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>&nbsp;搜索会话</div>
+        </div>
+        <div class="adminhead" style="position:absolute;top:150px;left:0;right:0">全部会话 <span style="margin-left:auto;font-size:28px;color:var(--green);font-weight:normal">● 在线</span></div>
+        <div class="list" id="alist"></div>
+        <!-- chat view slides over -->
+        <div id="achat" style="position:absolute;inset:0;background:#e9eef3">
+          <div style="height:150px;background:#fff"></div>
+          <div class="chathead" style="position:absolute;top:150px;left:0;right:0;background:#fff;color:#10202e;border-bottom:1px solid #dde3ea">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+            <div class="avatar" style="background:#f39c4a">名</div>
+            <div><div style="font-size:34px;font-weight:bold">访客-9C1D <span class="tag">来源：名片</span></div><div style="font-size:24px;color:#8a97a5">匿名访客 · 网页在线</div></div>
+          </div>
+          <div class="msgs">
+            <div class="bubble them">请问周末可以预约吗？<div class="tm">10:24</div></div>
+            <div class="bubble me" id="am1">可以的，周六上午 10 点有空位，帮您预留？<div class="tm">10:24 ✓✓</div></div>
+          </div>
+          <div class="inputbar"><div class="inputbox" id="atyping">回复访客…</div>
+            <div class="send"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="chips center" id="s5chips" style="top:1715px">
+      <div class="chip">新消息自动置顶</div><div class="chip">未读提醒</div>
+    </div>
+  </section>
+
+  <!-- S6: features -->
+  <section class="scene" id="s6">
+    <div class="center h2" style="top:170px">为<span class="blue">私密沟通</span>而生</div>
+    <div id="feats"></div>
+    <div class="center fine" id="s6fine" style="top:1800px">* 采用 HTTPS/TLS 传输加密，部署在你自己的服务器</div>
+  </section>
+
+  <!-- S7: use cases -->
+  <section class="scene" id="s7">
+    <div class="center h2" style="top:300px">谁在需要它？</div>
+    <div class="center h3" style="top:410px">所有不想让客户「多走一步」的人</div>
+    <div id="uses"></div>
+  </section>
+
+  <!-- S8: CTA -->
+  <section class="scene" id="s8">
+    <div class="center" id="s8logo" style="top:420px">
+      <div class="logo" style="width:220px;height:220px;border-radius:60px">
+        <svg width="126" height="126" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01" stroke-width="2.8"/>
+        </svg>
+      </div>
+    </div>
+    <div class="center h1" style="top:720px;font-size:110px;letter-spacing:14px">密语盒</div>
+    <div class="center h2" id="s8line" style="top:930px;font-size:60px">让每一次咨询<br>都从<span class="blue">一次扫码</span>开始</div>
+    <div class="center" id="s8cta" style="top:1250px"><div class="cta">立即部署 · 预约演示</div></div>
+    <div class="center h3" id="s8sub" style="top:1450px;font-size:38px">自部署 · 匿名 · 轻量 · 一键上线</div>
+  </section>
+
+  <div id="progress"></div>
+</div>
+
+<script src="vendor/motion-12.43.0.js"></script>
+<script>
+// Same scenes as video.html, but every move is a Motion (motion.dev) timeline segment with spring physics.
+// The whole 60s is one paused Motion sequence; render(t) seeks it, so frames are deterministic.
+const { animate, spring, stagger, motionValue } = Motion;
+const $ = id => document.getElementById(id);
+const DURATION = 60;
+
+// Spring presets
+const POP = { type: spring, bounce: 0.25, visualDuration: 0.5 };
+const BOUNCY = { type: spring, bounce: 0.5, visualDuration: 0.55 };
+const SOFT = { type: spring, bounce: 0.1, visualDuration: 0.7 };
+
+// scene timing [start, end]
+const SCENES = { s1: [0, 7.2], s2: [7, 12.2], s3: [12, 17.2], s4: [17, 29.2], s5: [29, 41.2], s6: [41, 51.2], s7: [51, 56.2], s8: [56, 60.5] };
+
+// ---------- build dynamic elements ----------
+const dotsEl = $('dots'); const dots = [];
+const person = `<svg width="96" height="96" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7.5" r="4"/><path d="M3.5 22c.8-5 4.3-7.5 8.5-7.5s7.7 2.5 8.5 7.5z"/></svg>`;
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) {
+  const d = document.createElement('div'); d.className = 'dot';
+  d.style.left = (c * 170 + 20) + 'px'; d.style.top = (r * 150 + 20) + 'px'; d.style.color = '#2aabee';
+  d.innerHTML = person; dotsEl.appendChild(d);
+  dots.push({ el: d, leave: 8.4 + rnd() * 2.6, stays: rnd() < 0.25, dx: (rnd() - .5) * 300 });
+}
+
+// QR-like pattern (decorative)
+(function drawQR() {
+  const cv = $('qr'), g = cv.getContext('2d'), n = 29, s = 400 / n;
+  g.fillStyle = '#fff'; g.fillRect(0, 0, 400, 400); g.fillStyle = '#10202e';
+  let sd = 42; const r = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  const finder = (x, y) => { for (let i = 0; i < 7; i++) for (let j = 0; j < 7; j++) {
+    const edge = i === 0 || i === 6 || j === 0 || j === 6, core = i >= 2 && i <= 4 && j >= 2 && j <= 4;
+    if (edge || core) g.fillRect((x + i) * s, (y + j) * s, s + .5, s + .5); } };
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const inF = (i < 8 && j < 8) || (i > n - 9 && j < 8) || (i < 8 && j > n - 9);
+    if (!inF && r() < .48) g.fillRect(i * s, j * s, s + .5, s + .5);
+  }
+  finder(0, 0); finder(n - 7, 0); finder(0, n - 7);
+  g.fillStyle = '#2aabee'; g.beginPath(); g.roundRect(160, 160, 80, 80, 18); g.fill();
+})();
+
+// admin list rows (at = arrival time, -1 = already in the list)
+const ROWS = [
+  { id: 'r0', name: '访客-9C1D', tag: '名片', prev: '请问周末可以预约吗？', time: '10:24', color: '#f39c4a', ch: '名', badge: 2, at: 33.6 },
+  { id: 'r1', name: '访客-7B44', tag: '官网', prev: '你好，想了解一下方案', time: '10:23', color: '#8e6cf0', ch: '官', badge: 1, at: 32.2 },
+  { id: 'r2', name: '访客-3F2A', tag: '海报', prev: '收到，谢谢！', time: '10:22', color: '#3ddc97', ch: '海', badge: 3, at: 30.8 },
+  { id: 'r3', name: '访客-A817', tag: '门店', prev: '好的，明天见', time: '昨天', color: '#2aabee', ch: '店', badge: 0, at: -1 },
+  { id: 'r4', name: '小林（已备注）', tag: '官网', prev: '已经付款了，请查收', time: '昨天', color: '#ff7aa2', ch: '林', badge: 0, at: -1 },
+  { id: 'r5', name: '访客-55E0', tag: '名片', prev: '图片', time: '周一', color: '#f5c542', ch: '名', badge: 0, at: -1 },
+];
+const alist = $('alist');
+for (const r of ROWS) {
+  const d = document.createElement('div'); d.className = 'row'; d.id = r.id; d.style.top = '0px';
+  d.innerHTML = `<div class="avatar" style="background:${r.color}">${r.ch}</div>
+    <div class="meta"><div class="name"><div>${r.name}<span class="tag">${r.tag}</span></div><span>${r.time}</span></div>
+    <div class="prev"><div style="overflow:hidden;text-overflow:ellipsis">${r.prev}</div>${r.badge ? `<div class="badge">${r.badge}</div>` : ''}</div></div>`;
+  alist.appendChild(d); r.el = d;
+}
+
+const FEATS = [
+  ['自部署', '数据存放在你自己的服务器，不经第三方平台', '<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/>'],
+  ['访客匿名', '不要手机号、不要账号，打开就能聊', '<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/><path d="M3 3l18 18"/>'],
+  ['加密传输', '全程 HTTPS / TLS，自动申请证书', '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>'],
+  ['轻量部署', '一台小服务器 + Docker，一键启动', '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'],
+  ['二维码入口', '印上名片、海报、门店立牌', '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/>'],
+  ['实时提醒', '新消息即时推送，未读一目了然', '<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21h4"/>'],
+];
+const feats = $('feats');
+const featEls = FEATS.map(([t, d, ic], i) => {
+  const e = document.createElement('div'); e.className = 'feat';
+  e.style.left = (i % 2 ? 580 : 60) + 'px'; e.style.top = (360 + Math.floor(i / 2) * 380) + 'px';
+  e.innerHTML = `<div class="fi"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></div><div class="ft">${t}</div><div class="fd">${d}</div>`;
+  feats.appendChild(e); return e;
+});
+
+const USES = [['心理咨询', 120, 620], ['法律咨询', 560, 620], ['设计工作室', 80, 800], ['独立站客服', 560, 800],
+  ['线下门店', 140, 980], ['私人顾问', 580, 980], ['培训机构', 110, 1160], ['售后服务', 570, 1160], ['活动报名答疑', 290, 1340]];
+const uses = $('uses');
+const useEls = USES.map(u => { const e = document.createElement('div'); e.className = 'usecase'; e.textContent = u[0];
+  e.style.left = u[1] + 'px'; e.style.top = u[2] + 'px'; uses.appendChild(e); return e; });
+
+// typing: a Motion value drives how many characters are shown in an input box
+function typer(el, full, placeholder) {
+  const mv = motionValue(0);
+  mv.on('change', p => {
+    const n = Math.round(full.length * p);
+    if (p <= 0 || p >= 1.001) { el.textContent = placeholder; el.style.color = '#8a97a5'; }
+    else { el.textContent = full.slice(0, n) + '|'; el.style.color = '#10202e'; }
+  });
+  return mv;
+}
+const vType1 = typer($('vtyping'), '你好，想咨询一下服务价格', '输入消息…');
+const vType2 = typer($('vtyping'), '不用下载 App，真方便！', '输入消息…');
+const aType = typer($('atyping'), '可以的，周六上午 10 点有空位，帮您预留？', '回复访客…');
+
+// ---------- the timeline ----------
+const seq = [];
+const add = (target, values, opts) => seq.push([target, values, opts]);
+const rise = (el, at, dist = 60, t = POP) => add(el, { opacity: [0, 1], y: [dist, 0] }, { at, ...t });
+const zoom = (el, at, t = BOUNCY) => add(el, { opacity: [0, 1], scale: [0.6, 1] }, { at, ...t });
+
+// background + progress
+add('#orb1', { x: [0, 120, -80, 100, 0], y: [0, 160, -60, 120, 0] }, { at: 0, duration: DURATION, ease: 'easeInOut' });
+add('#orb2', { x: [0, -140, 60, -100, 0], y: [0, -120, 80, -60, 0] }, { at: 0, duration: DURATION, ease: 'easeInOut' });
+add('#progress', { width: ['0px', '1080px'] }, { at: 0, duration: DURATION, ease: 'linear' });
+
+// scene cross-fades
+for (const [id, [a, b]] of Object.entries(SCENES)) {
+  add('#' + id, { opacity: [0, 1] }, { at: a, duration: 0.4 });
+  if (b < DURATION) add('#' + id, { opacity: [1, 0] }, { at: b - 0.4, duration: 0.4 });
+}
+
+// S1 hook
+rise('#s1a', 0.2); rise('#s1b', 0.9);
+[['ob1', 2.0, 4.0], ['ob2', 2.4, 4.4], ['ob3', 2.8, 4.8]].forEach(([id, a, x]) => {
+  rise('#' + id, a, 80, BOUNCY);
+  add(`#${id} .strike`, { scaleX: [0, 1] }, { at: x, duration: 0.35, ease: 'easeOut' });
+  add(`#${id} .x`, { opacity: [0, 1], scale: [0, 1] }, { at: x, type: spring, bounce: 0.6, visualDuration: 0.4 });
+  add('#' + id, { opacity: [1, 0.45], x: [0, -12, 12, -6, 0] }, { at: x + 0.3, duration: 0.5 });
+});
+rise('#s1c', 5.3);
+
+// S2 visitors leaving
+for (const d of dots) if (!d.stays) {
+  add(d.el, { color: ['#2aabee', '#5b6b82'] }, { at: d.leave, duration: 0.2 });
+  add(d.el, { opacity: [1, 0], x: [0, d.dx], y: [0, 180], scale: [1, 0.7] }, { at: d.leave + 0.1, duration: 1, ease: 'easeIn' });
+}
+zoom('#s2c', 10.8);
+
+// S3 reveal
+add('#s3logo', { opacity: [0, 1], scale: [0.3, 1], rotate: [-25, 0] }, { at: 12.3, type: spring, bounce: 0.55, visualDuration: 0.8 });
+add('#s3logo .logo', { boxShadow: ['0 30px 80px rgba(42,171,238,.3)', '0 30px 160px rgba(42,171,238,.75)', '0 30px 110px rgba(42,171,238,.55)'] }, { at: 12.6, duration: 2.4 });
+rise('#s3name', 13.0, 80); rise('#s3en', 13.4, 40); rise('#s3tag', 14.0);
+add('#s3chips .chip', { opacity: [0, 1], scale: [0.5, 1] }, { at: 14.7, ...BOUNCY, delay: stagger(0.15) });
+
+// S4 visitor side
+zoom('#qrcard', 17.3, SOFT);
+add('#scanline', { y: [0, 420, 0, 420, 0] }, { at: 17.4, duration: 2.6, ease: 'easeInOut' });
+add('#qrcard', { opacity: [1, 0], scale: [1, 0.8] }, { at: 20.0, duration: 0.5 });
+add('#vphone', { opacity: [0, 1], y: [400, 0] }, { at: 20.3, type: spring, bounce: 0.2, visualDuration: 0.7 });
+add(vType1, [0, 1], { at: 21.2, duration: 1.1, ease: 'linear' });
+add(vType1, [1, 2], { at: 22.4, duration: 0.01 });
+add('#vm1', { opacity: [0, 1], y: [30, 0], scale: [0.85, 1] }, { at: 22.5, ...BOUNCY });
+add('#vm2', { opacity: [0, 1], y: [30, 0], scale: [0.85, 1] }, { at: 24.0, ...BOUNCY });
+add(vType2, [0, 1], { at: 25.0, duration: 1.0, ease: 'linear' });
+add(vType2, [1, 2], { at: 26.1, duration: 0.01 });
+add('#vm3', { opacity: [0, 1], y: [30, 0], scale: [0.85, 1] }, { at: 26.2, ...BOUNCY });
+add('#s4chips .chip', { opacity: [0, 1], y: [40, 0] }, { at: 22.6, ...POP, delay: stagger(0.12) });
+
+// S5 admin side: rows spring into the list and push older ones down
+add('#aphone', { opacity: [0, 1], y: [400, 0] }, { at: 29.2, type: spring, bounce: 0.2, visualDuration: 0.7 });
+const ROW_H = 150, ROW_SPRING = { type: spring, bounce: 0.3, visualDuration: 0.45 };
+const yNow = new Map();
+ROWS.filter(r => r.at < 0).forEach((r, i) => {
+  yNow.set(r, i * ROW_H);
+  add(r.el, { y: [i * ROW_H, i * ROW_H] }, { at: 0, duration: 0.01 });
+});
+for (const r of ROWS.filter(r => r.at >= 0).sort((a, b) => a.at - b.at)) {
+  for (const [other, y] of yNow) { add(other.el, { y: [y, y + ROW_H] }, { at: r.at, ...ROW_SPRING }); yNow.set(other, y + ROW_H); }
+  add(r.el, { opacity: [0, 1], x: [-220, 0], y: [0, 0] }, { at: r.at, ...ROW_SPRING });
+  add(r.el, { backgroundColor: ['#e8f6fe', '#ffffff'] }, { at: r.at + 0.6, duration: 0.8 });
+  add(`#${r.id} .badge`, { scale: [0, 1.25, 1] }, { at: r.at + 0.15, duration: 0.45 });
+  yNow.set(r, 0);
+}
+add('#r0', { backgroundColor: ['#ffffff', '#d4ecfb', '#ffffff'], scale: [1, 0.97, 1] }, { at: 35.4, duration: 0.6 });
+add('#achat', { x: ['100%', '0%'] }, { at: 35.9, type: spring, bounce: 0, visualDuration: 0.5 });
+add(aType, [0, 1], { at: 37.0, duration: 1.6, ease: 'linear' });
+add(aType, [1, 2], { at: 38.7, duration: 0.01 });
+add('#am1', { opacity: [0, 1], y: [30, 0], scale: [0.85, 1] }, { at: 38.8, ...BOUNCY });
+add('#s5chips .chip', { opacity: [0, 1], y: [40, 0] }, { at: 31.0, ...POP, delay: stagger(0.12) });
+
+// S6 features
+add(featEls, { opacity: [0, 1], scale: [0.6, 1], y: [40, 0] }, { at: 41.6, ...BOUNCY, delay: stagger(0.9) });
+add('#feats .fi', { rotate: [-30, 0] }, { at: 41.6, ...BOUNCY, delay: stagger(0.9) });
+rise('#s6fine', 47.5, 20);
+
+// S7 use cases
+add(useEls, { opacity: [0, 1], scale: [0.4, 1] }, { at: 51.6, ...BOUNCY, delay: stagger(0.28) });
+
+// S8 CTA
+add('#s8logo', { opacity: [0, 1], scale: [0.3, 1], rotate: [20, 0] }, { at: 56.2, type: spring, bounce: 0.5, visualDuration: 0.7 });
+rise('#s8line', 56.9);
+add('#s8cta', { opacity: [0, 1], scale: [0.5, 1] }, { at: 57.6, ...BOUNCY });
+add('#s8cta .cta', { scale: [1, 1.06, 1] }, { at: 58.6, duration: 0.8, ease: 'easeInOut' });
+rise('#s8sub', 58.2, 30);
+
+const timeline = animate(seq);
+timeline.pause();
+
+// Seek the timeline, then wait two frames so Motion's frame loop has written every value.
+window.render = t => {
+  timeline.time = t;
+  return new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+};
+window.render(+(new URLSearchParams(location.search).get('t') || 0));
+
+// live preview: open with ?play to watch in a browser
+if (location.search.includes('play')) { timeline.time = 0; timeline.play(); }
+</script>
+</body>
+</html>
