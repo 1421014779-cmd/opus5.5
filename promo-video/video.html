@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>密语盒 宣传视频</title>
+<style>
+  :root {
+    --bg1: #0b1426;
+    --bg2: #12264a;
+    --blue: #2aabee;
+    --blue2: #229ed9;
+    --text: #f4f7fb;
+    --muted: #9fb2cc;
+    --red: #ff5a6a;
+    --green: #3ddc97;
+    --card: rgba(255,255,255,0.06);
+    --line: rgba(255,255,255,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg1); }
+  body { font-family: "WenQuanYi Zen Hei", "DejaVu Sans", sans-serif; color: var(--text); }
+  #stage {
+    position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(1200px 900px at 50% 30%, var(--bg2), var(--bg1) 70%);
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .35; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .center { position: absolute; left: 0; right: 0; text-align: center; }
+  .h1 { font-size: 92px; font-weight: bold; letter-spacing: 4px; line-height: 1.25; }
+  .h2 { font-size: 64px; font-weight: bold; letter-spacing: 2px; line-height: 1.3; }
+  .h3 { font-size: 46px; color: var(--muted); letter-spacing: 2px; }
+  .blue { color: var(--blue); }
+  .red { color: var(--red); }
+
+  /* S1 obstacle cards */
+  .obst {
+    position: absolute; left: 190px; width: 700px; height: 150px; border-radius: 32px;
+    background: var(--card); border: 2px solid var(--line);
+    display: flex; align-items: center; gap: 36px; padding: 0 48px; font-size: 54px;
+  }
+  .obst .ic { width: 80px; height: 80px; border-radius: 22px; background: rgba(42,171,238,.18); display: grid; place-items: center; }
+  .obst .x { margin-left: auto; width: 80px; height: 80px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+  .strike { position: absolute; left: 30px; right: 30px; top: 50%; height: 6px; background: var(--red); border-radius: 3px; transform-origin: left center; }
+
+  /* S2 people dots */
+  #dots { position: absolute; left: 140px; top: 760px; width: 800px; height: 640px; }
+  .dot { position: absolute; width: 96px; height: 96px; }
+
+  /* logo */
+  .logo {
+    width: 260px; height: 260px; border-radius: 70px; margin: 0 auto;
+    background: linear-gradient(145deg, #37bbfe, #1d8fd0);
+    display: grid; place-items: center;
+    box-shadow: 0 30px 120px rgba(42,171,238,.55);
+  }
+  .chips { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .chip {
+    font-size: 44px; padding: 18px 40px; border-radius: 999px;
+    background: rgba(42,171,238,.16); border: 2px solid rgba(42,171,238,.55); color: #d8f0ff;
+  }
+
+  /* phone */
+  .phone {
+    position: absolute; left: 190px; width: 700px; height: 1180px; border-radius: 90px;
+    background: #05090f; padding: 26px; box-shadow: 0 40px 140px rgba(0,0,0,.6), 0 0 0 4px #24324a;
+  }
+  .screen { width: 100%; height: 100%; border-radius: 66px; overflow: hidden; position: relative; background: #eef2f6; color: #10202e; }
+  .urlbar {
+    height: 150px; background: #fff; display: flex; align-items: flex-end; padding: 0 34px 22px;
+    border-bottom: 1px solid #dde3ea;
+  }
+  .url { flex: 1; height: 64px; border-radius: 32px; background: #eef1f5; font-size: 30px; color: #4d5b6b; display: flex; align-items: center; gap: 12px; padding: 0 26px; }
+  .chathead { height: 120px; background: var(--blue); color: #fff; display: flex; align-items: center; gap: 22px; padding: 0 30px; }
+  .avatar { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; font-size: 34px; color: #fff; flex: none; }
+  .msgs { position: absolute; top: 270px; left: 0; right: 0; bottom: 130px; padding: 30px; }
+  .bubble { max-width: 78%; font-size: 36px; line-height: 1.4; padding: 22px 30px; border-radius: 34px; margin-bottom: 26px; position: relative; }
+  .bubble.me { margin-left: auto; background: #e1fec6; border-bottom-right-radius: 10px; }
+  .bubble.them { background: #fff; border-bottom-left-radius: 10px; }
+  .bubble .tm { font-size: 22px; color: #7a8a99; margin-top: 6px; text-align: right; }
+  .inputbar { position: absolute; left: 0; right: 0; bottom: 0; height: 130px; background: #fff; border-top: 1px solid #dde3ea; display: flex; align-items: center; gap: 20px; padding: 0 30px; }
+  .inputbox { flex: 1; height: 76px; border-radius: 38px; background: #f0f3f6; font-size: 32px; color: #8a97a5; display: flex; align-items: center; padding: 0 30px; }
+  .send { width: 76px; height: 76px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; }
+
+  .qrcard { position: absolute; left: 290px; width: 500px; height: 600px; border-radius: 44px; background: #fff; padding: 50px; color: #10202e; text-align: center; }
+  .scanline { position: absolute; left: 30px; right: 30px; height: 8px; background: var(--blue); box-shadow: 0 0 40px 10px rgba(42,171,238,.6); border-radius: 4px; }
+
+  /* admin list */
+  .list { position: absolute; top: 270px; left: 0; right: 0; bottom: 0; background: #fff; }
+  .row { position: absolute; left: 0; right: 0; height: 150px; display: flex; align-items: center; gap: 24px; padding: 0 30px; border-bottom: 1px solid #edf0f3; background: #fff; }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .name { font-size: 36px; font-weight: bold; display: flex; justify-content: space-between; }
+  .row .name span { font-size: 26px; color: #8a97a5; font-weight: normal; }
+  .row .prev { font-size: 30px; color: #6b7a89; margin-top: 8px; display: flex; justify-content: space-between; white-space: nowrap; }
+  .badge { min-width: 50px; height: 50px; border-radius: 25px; background: var(--blue); color: #fff; font-size: 28px; display: grid; place-items: center; padding: 0 14px; }
+  .tag { font-size: 22px; color: var(--blue2); background: #e4f4fd; border-radius: 10px; padding: 2px 12px; margin-left: 12px; font-weight: normal; }
+  .adminhead { height: 120px; background: #fff; display: flex; align-items: center; gap: 22px; padding: 0 34px; font-size: 40px; font-weight: bold; border-bottom: 1px solid #dde3ea; }
+  .search { height: 64px; margin: 0 30px; border-radius: 32px; background: #eef1f5; font-size: 28px; color: #8a97a5; display: flex; align-items: center; padding: 0 26px; }
+
+  /* features */
+  .feat {
+    position: absolute; width: 440px; height: 330px; border-radius: 40px;
+    background: var(--card); border: 2px solid var(--line); padding: 40px;
+  }
+  .feat .fi { width: 96px; height: 96px; border-radius: 28px; background: rgba(42,171,238,.18); display: grid; place-items: center; margin-bottom: 26px; }
+  .feat .ft { font-size: 46px; font-weight: bold; margin-bottom: 14px; }
+  .feat .fd { font-size: 32px; color: var(--muted); line-height: 1.4; }
+
+  .usecase { position: absolute; font-size: 50px; padding: 26px 48px; border-radius: 999px; background: var(--card); border: 2px solid var(--line); white-space: nowrap; }
+
+  .caption-top { position: absolute; top: 150px; left: 60px; right: 60px; text-align: center; }
+  .stepnum { display: inline-block; font-size: 34px; color: var(--blue); border: 2px solid var(--blue); border-radius: 999px; padding: 8px 30px; margin-bottom: 22px; letter-spacing: 4px; }
+
+  .cta {
+    display: inline-block; font-size: 52px; font-weight: bold; padding: 34px 80px; border-radius: 999px;
+    background: linear-gradient(135deg, #37bbfe, #1d8fd0); box-shadow: 0 20px 80px rgba(42,171,238,.5);
+  }
+  .fine { font-size: 28px; color: #6f84a3; }
+  #progress { position: absolute; left: 0; bottom: 0; height: 8px; background: var(--blue); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="orb" id="orb1" style="width:700px;height:700px;background:#2aabee;left:-200px;top:200px"></div>
+  <div class="orb" id="orb2" style="width:600px;height:600px;background:#6c5ce7;right:-200px;top:1200px"></div>
+
+  <!-- S1: hook -->
+  <section class="scene" id="s1">
+    <div class="center h1" id="s1a" style="top:300px">客户想找你聊</div>
+    <div class="center h1" id="s1b" style="top:420px">却卡在了<span class="red">第一步</span></div>
+    <div class="obst" id="ob1" style="top:700px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12M6 10l6 6 6-6M4 20h16"/></svg></div>
+      下载 App<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="obst" id="ob2" style="top:890px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></div>
+      注册账号<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="obst" id="ob3" style="top:1080px">
+      <div class="ic"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+      绑定手机号<div class="strike"></div>
+      <div class="x"><svg width="40" height="40" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    </div>
+    <div class="center h2" id="s1c" style="top:1400px">每多一道门槛<br><span class="blue">就有客户悄悄离开</span></div>
+  </section>
+
+  <!-- S2: people leaving -->
+  <section class="scene" id="s2">
+    <div class="center h2" style="top:380px">访客犹豫的那几秒</div>
+    <div class="center h3" style="top:480px">一笔生意，就这样溜走了</div>
+    <div id="dots"></div>
+    <div class="center h2" id="s2c" style="top:1500px">能不能<span class="blue">扫一下就聊</span>？</div>
+  </section>
+
+  <!-- S3: reveal -->
+  <section class="scene" id="s3">
+    <div class="center" id="s3logo" style="top:520px">
+      <div class="logo">
+        <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01" stroke-width="2.8"/>
+        </svg>
+      </div>
+    </div>
+    <div class="center h1" id="s3name" style="top:850px;font-size:120px;letter-spacing:16px">密语盒</div>
+    <div class="center h3" id="s3en" style="top:1010px;letter-spacing:10px">WHISPERBOX</div>
+    <div class="center h2" id="s3tag" style="top:1170px;font-size:56px">自部署的匿名网页接待系统</div>
+    <div class="chips center" id="s3chips" style="top:1320px">
+      <div class="chip">扫码即聊</div><div class="chip">无需安装</div><div class="chip">无需注册</div>
+    </div>
+  </section>
+
+  <!-- S4: visitor side -->
+  <section class="scene" id="s4">
+    <div class="caption-top">
+      <div class="stepnum">访客端</div>
+      <div class="h2" style="font-size:58px">扫码 / 点链接<br>打开网页<span class="blue">直接聊</span></div>
+    </div>
+    <div class="qrcard" id="qrcard" style="top:620px">
+      <canvas id="qr" width="400" height="400" style="width:400px;height:400px"></canvas>
+      <div style="font-size:36px;margin-top:20px;font-weight:bold">扫一扫 · 立即咨询</div>
+      <div class="scanline" id="scanline" style="top:60px"></div>
+    </div>
+    <div class="phone" id="vphone" style="top:480px">
+      <div class="screen">
+        <div class="urlbar"><div class="url">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2fa36b" stroke-width="2.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+          https://你的域名/chat</div></div>
+        <div class="chathead">
+          <div class="avatar" style="background:rgba(255,255,255,.25)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+          </div>
+          <div><div style="font-size:36px;font-weight:bold">在线咨询</div><div style="font-size:26px;opacity:.85">通常几分钟内回复</div></div>
+        </div>
+        <div class="msgs">
+          <div style="text-align:center;font-size:24px;color:#8a97a5;margin-bottom:26px">无需登录 · 已为你创建匿名会话</div>
+          <div class="bubble me" id="vm1">你好，想咨询一下服务价格<div class="tm">10:21 ✓✓</div></div>
+          <div class="bubble them" id="vm2">您好！很高兴为您服务～请问您想了解哪一项？<div class="tm">10:21</div></div>
+          <div class="bubble me" id="vm3">不用下载 App，真方便！<div class="tm">10:22 ✓✓</div></div>
+        </div>
+        <div class="inputbar"><div class="inputbox" id="vtyping">输入消息…</div>
+          <div class="send"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></div></div>
+      </div>
+    </div>
+    <div class="chips center" id="s4chips" style="top:1715px">
+      <div class="chip">免安装</div><div class="chip">免注册</div><div class="chip">匿名</div>
+    </div>
+  </section>
+
+  <!-- S5: admin side -->
+  <section class="scene" id="s5">
+    <div class="caption-top">
+      <div class="stepnum">管理端</div>
+      <div class="h2" style="font-size:58px">像 Telegram 一样的<span class="blue">会话列表</span><br>每位访客，一个独立对话</div>
+    </div>
+    <div class="phone" id="aphone" style="top:480px">
+      <div class="screen" style="background:#fff">
+        <div style="height:150px;display:flex;align-items:flex-end;padding:0 34px 18px">
+          <div class="search" style="margin:0;flex:1">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8a97a5" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>&nbsp;搜索会话</div>
+        </div>
+        <div class="adminhead" style="position:absolute;top:150px;left:0;right:0">全部会话 <span style="margin-left:auto;font-size:28px;color:var(--green);font-weight:normal">● 在线</span></div>
+        <div class="list" id="alist"></div>
+        <!-- chat view slides over -->
+        <div id="achat" style="position:absolute;inset:0;background:#e9eef3">
+          <div style="height:150px;background:#fff"></div>
+          <div class="chathead" style="position:absolute;top:150px;left:0;right:0;background:#fff;color:#10202e;border-bottom:1px solid #dde3ea">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+            <div class="avatar" style="background:#f39c4a">名</div>
+            <div><div style="font-size:34px;font-weight:bold">访客-9C1D <span class="tag">来源：名片</span></div><div style="font-size:24px;color:#8a97a5">匿名访客 · 网页在线</div></div>
+          </div>
+          <div class="msgs">
+            <div class="bubble them">请问周末可以预约吗？<div class="tm">10:24</div></div>
+            <div class="bubble me" id="am1">可以的，周六上午 10 点有空位，帮您预留？<div class="tm">10:24 ✓✓</div></div>
+          </div>
+          <div class="inputbar"><div class="inputbox" id="atyping">回复访客…</div>
+            <div class="send"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M3 20l18-8L3 4v6l12 2-12 2z"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="chips center" id="s5chips" style="top:1715px">
+      <div class="chip">新消息自动置顶</div><div class="chip">未读提醒</div>
+    </div>
+  </section>
+
+  <!-- S6: features -->
+  <section class="scene" id="s6">
+    <div class="center h2" style="top:170px">为<span class="blue">私密沟通</span>而生</div>
+    <div id="feats"></div>
+    <div class="center fine" id="s6fine" style="top:1800px">* 采用 HTTPS/TLS 传输加密，部署在你自己的服务器</div>
+  </section>
+
+  <!-- S7: use cases -->
+  <section class="scene" id="s7">
+    <div class="center h2" style="top:300px">谁在需要它？</div>
+    <div class="center h3" style="top:410px">所有不想让客户「多走一步」的人</div>
+    <div id="uses"></div>
+  </section>
+
+  <!-- S8: CTA -->
+  <section class="scene" id="s8">
+    <div class="center" id="s8logo" style="top:420px">
+      <div class="logo" style="width:220px;height:220px;border-radius:60px">
+        <svg width="126" height="126" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01" stroke-width="2.8"/>
+        </svg>
+      </div>
+    </div>
+    <div class="center h1" style="top:720px;font-size:110px;letter-spacing:14px">密语盒</div>
+    <div class="center h2" id="s8line" style="top:930px;font-size:60px">让每一次咨询<br>都从<span class="blue">一次扫码</span>开始</div>
+    <div class="center" id="s8cta" style="top:1250px"><div class="cta">立即部署 · 预约演示</div></div>
+    <div class="center h3" id="s8sub" style="top:1450px;font-size:38px">自部署 · 匿名 · 轻量 · 一键上线</div>
+  </section>
+
+  <div id="progress"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const easeOut = x => 1 - Math.pow(1 - x, 3);
+const easeInOut = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const back = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const DURATION = 60;
+
+// scene timing [start, end]
+const SCENES = { s1: [0, 7.2], s2: [7, 12.2], s3: [12, 17.2], s4: [17, 29.2], s5: [29, 41.2], s6: [41, 51.2], s7: [51, 56.2], s8: [56, 60.5] };
+
+// pop-in: opacity + rise
+function pop(el, t, at, dur = .5, dist = 60) {
+  const p = easeOut(seg(t, at, at + dur));
+  el.style.opacity = p;
+  el.style.transform = `translateY(${(1 - p) * dist}px)`;
+  return p;
+}
+function popScale(el, t, at, dur = .6) {
+  const x = seg(t, at, at + dur);
+  el.style.opacity = clamp(x * 2);
+  el.style.transform = `scale(${0.6 + 0.4 * back(x)})`;
+}
+
+// ---------- build dynamic elements ----------
+// S2 dots: 5 x 4 people
+const dotsEl = $('dots'); const dots = [];
+const person = c => `<svg width="96" height="96" viewBox="0 0 24 24" fill="${c}"><circle cx="12" cy="7.5" r="4"/><path d="M3.5 22c.8-5 4.3-7.5 8.5-7.5s7.7 2.5 8.5 7.5z"/></svg>`;
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) {
+  const d = document.createElement('div'); d.className = 'dot';
+  d.style.left = (c * 170 + 20) + 'px'; d.style.top = (r * 150 + 20) + 'px';
+  d.innerHTML = person('#2aabee'); dotsEl.appendChild(d);
+  dots.push({ el: d, leave: 8.4 + rnd() * 2.6, stays: rnd() < 0.25, dx: (rnd() - .5) * 300 });
+}
+
+// QR-like pattern (decorative)
+(function drawQR() {
+  const cv = $('qr'), g = cv.getContext('2d'), n = 29, s = 400 / n;
+  g.fillStyle = '#fff'; g.fillRect(0, 0, 400, 400); g.fillStyle = '#10202e';
+  let sd = 42; const r = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  const finder = (x, y) => { for (let i = 0; i < 7; i++) for (let j = 0; j < 7; j++) {
+    const edge = i === 0 || i === 6 || j === 0 || j === 6, core = i >= 2 && i <= 4 && j >= 2 && j <= 4;
+    if (edge || core) g.fillRect((x + i) * s, (y + j) * s, s + .5, s + .5); } };
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const inF = (i < 8 && j < 8) || (i > n - 9 && j < 8) || (i < 8 && j > n - 9);
+    if (!inF && r() < .48) g.fillRect(i * s, j * s, s + .5, s + .5);
+  }
+  finder(0, 0); finder(n - 7, 0); finder(0, n - 7);
+  g.fillStyle = '#2aabee'; g.beginPath(); g.roundRect(160, 160, 80, 80, 18); g.fill();
+})();
+
+// admin list rows
+const ROWS = [
+  { id: 'r0', name: '访客-9C1D', tag: '名片', prev: '请问周末可以预约吗？', time: '10:24', color: '#f39c4a', ch: '名', badge: 2, at: 33.6 },
+  { id: 'r1', name: '访客-7B44', tag: '官网', prev: '你好，想了解一下方案', time: '10:23', color: '#8e6cf0', ch: '官', badge: 1, at: 32.2 },
+  { id: 'r2', name: '访客-3F2A', tag: '海报', prev: '收到，谢谢！', time: '10:22', color: '#3ddc97', ch: '海', badge: 3, at: 30.8 },
+  { id: 'r3', name: '访客-A817', tag: '门店', prev: '好的，明天见', time: '昨天', color: '#2aabee', ch: '店', badge: 0, at: -1 },
+  { id: 'r4', name: '小林（已备注）', tag: '官网', prev: '已经付款了，请查收', time: '昨天', color: '#ff7aa2', ch: '林', badge: 0, at: -1 },
+  { id: 'r5', name: '访客-55E0', tag: '名片', prev: '图片', time: '周一', color: '#f5c542', ch: '名', badge: 0, at: -1 },
+];
+const alist = $('alist');
+for (const r of ROWS) {
+  const d = document.createElement('div'); d.className = 'row'; d.id = r.id;
+  d.innerHTML = `<div class="avatar" style="background:${r.color}">${r.ch}</div>
+    <div class="meta"><div class="name"><div>${r.name}<span class="tag">${r.tag}</span></div><span>${r.time}</span></div>
+    <div class="prev"><div style="overflow:hidden;text-overflow:ellipsis">${r.prev}</div>${r.badge ? `<div class="badge">${r.badge}</div>` : ''}</div></div>`;
+  alist.appendChild(d); r.el = d;
+}
+
+// features
+const FEATS = [
+  ['自部署', '数据存放在你自己的服务器，不经第三方平台', '<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/>'],
+  ['访客匿名', '不要手机号、不要账号，打开就能聊', '<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/><path d="M3 3l18 18"/>'],
+  ['加密传输', '全程 HTTPS / TLS，自动申请证书', '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>'],
+  ['轻量部署', '一台小服务器 + Docker，一键启动', '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'],
+  ['二维码入口', '印上名片、海报、门店立牌', '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/>'],
+  ['实时提醒', '新消息即时推送，未读一目了然', '<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21h4"/>'],
+];
+const feats = $('feats');
+FEATS.forEach(([t, d, ic], i) => {
+  const e = document.createElement('div'); e.className = 'feat';
+  e.style.left = (i % 2 ? 580 : 60) + 'px'; e.style.top = (360 + Math.floor(i / 2) * 380) + 'px';
+  e.innerHTML = `<div class="fi"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#2aabee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></div><div class="ft">${t}</div><div class="fd">${d}</div>`;
+  feats.appendChild(e); FEATS[i].el = e;
+});
+
+// use cases
+const USES = [['心理咨询', 120, 620], ['法律咨询', 560, 620], ['设计工作室', 80, 800], ['独立站客服', 560, 800],
+  ['线下门店', 140, 980], ['私人顾问', 580, 980], ['培训机构', 110, 1160], ['售后服务', 570, 1160], ['活动报名答疑', 290, 1340]];
+const uses = $('uses');
+USES.forEach((u, i) => { const e = document.createElement('div'); e.className = 'usecase'; e.textContent = u[0];
+  e.style.left = u[1] + 'px'; e.style.top = u[2] + 'px'; uses.appendChild(e); u.el = e; });
+
+// typing helper
+function typeText(el, full, t, a, b, placeholder) {
+  if (t < a) { el.textContent = placeholder; el.style.color = '#8a97a5'; return; }
+  const n = Math.round(full.length * seg(t, a, b));
+  if (t > b + .25) { el.textContent = placeholder; el.style.color = '#8a97a5'; return; }
+  el.textContent = full.slice(0, n) + (Math.floor(t * 3) % 2 ? '|' : ' ');
+  el.style.color = '#10202e';
+}
+
+// ---------- render(t) ----------
+window.render = function (t) {
+  // scene fade
+  for (const [id, [a, b]] of Object.entries(SCENES)) {
+    const o = Math.min(seg(t, a, a + .4), 1 - seg(t, b - .4, b));
+    const el = $(id); el.style.opacity = o; el.style.display = o > 0 ? 'block' : 'none';
+  }
+  $('orb1').style.transform = `translate(${Math.sin(t / 4) * 120}px, ${Math.cos(t / 5) * 160}px)`;
+  $('orb2').style.transform = `translate(${Math.cos(t / 3.5) * 140}px, ${Math.sin(t / 4.5) * 120}px)`;
+  $('progress').style.width = (clamp(t / DURATION) * 1080) + 'px';
+
+  // S1
+  if (t < 7.5) {
+    pop($('s1a'), t, .2); pop($('s1b'), t, .9);
+    [['ob1', 2.0, 4.0], ['ob2', 2.4, 4.4], ['ob3', 2.8, 4.8]].forEach(([id, a, x]) => {
+      const el = $(id); pop(el, t, a, .5, 80);
+      const k = easeOut(seg(t, x, x + .4));
+      el.querySelector('.strike').style.transform = `scaleX(${k})`;
+      el.querySelector('.x').style.transform = `scale(${back(seg(t, x, x + .4))})`;
+      el.querySelector('.x').style.opacity = k > 0 ? 1 : 0;
+      if (t > x + .3) el.style.opacity = Math.min(el.style.opacity, 1 - .55 * seg(t, x + .3, x + .8));
+    });
+    pop($('s1c'), t, 5.3);
+  }
+  // S2
+  if (t > 6.8 && t < 12.5) {
+    for (const d of dots) {
+      const k = d.stays ? 0 : easeInOut(seg(t, d.leave, d.leave + 1));
+      d.el.style.opacity = 1 - k;
+      d.el.style.transform = `translate(${d.dx * k}px, ${180 * k}px) scale(${1 - .3 * k})`;
+      d.el.querySelector('svg').setAttribute('fill', k > 0.05 ? '#5b6b82' : '#2aabee');
+    }
+    pop($('s2c'), t, 10.8);
+  }
+  // S3
+  if (t > 11.8 && t < 17.5) {
+    popScale($('s3logo'), t, 12.3, .8);
+    $('s3logo').querySelector('.logo').style.boxShadow = `0 30px ${120 + 40 * Math.sin(t * 3)}px rgba(42,171,238,.6)`;
+    pop($('s3name'), t, 13.0); pop($('s3en'), t, 13.4); pop($('s3tag'), t, 14.0); pop($('s3chips'), t, 14.7);
+  }
+  // S4 visitor
+  if (t > 16.8 && t < 29.5) {
+    const qr = $('qrcard');
+    const qOut = seg(t, 20.0, 20.6);
+    qr.style.opacity = Math.min(seg(t, 17.3, 17.8), 1 - qOut);
+    qr.style.transform = `scale(${1 - .2 * qOut})`;
+    $('scanline').style.top = (60 + 420 * (0.5 - 0.5 * Math.cos((t - 17.5) * Math.PI / .9))) + 'px';
+    const ph = $('vphone'); const pin = easeOut(seg(t, 20.3, 21));
+    ph.style.opacity = pin; ph.style.transform = `translateY(${(1 - pin) * 300}px)`;
+    if (t < 23.5) typeText($('vtyping'), '你好，想咨询一下服务价格', t, 21.2, 22.3, '输入消息…');
+    else typeText($('vtyping'), '不用下载 App，真方便！', t, 25.0, 26.0, '输入消息…');
+    pop($('vm1'), t, 22.5, .4, 30);
+    pop($('vm2'), t, 24.0, .4, 30);
+    pop($('vm3'), t, 26.2, .4, 30);
+    pop($('s4chips'), t, 22.6);
+  }
+  // S5 admin
+  if (t > 28.8 && t < 41.5) {
+    const ph = $('aphone'); const pin = easeOut(seg(t, 29.2, 29.9));
+    ph.style.opacity = pin; ph.style.transform = `translateY(${(1 - pin) * 300}px)`;
+    // ordering: rows that have "arrived" go to the top, newest first
+    const arrived = ROWS.filter(r => r.at >= 0 && t >= r.at).sort((a, b) => b.at - a.at);
+    const pending = ROWS.filter(r => r.at >= 0 && t < r.at);
+    const old = ROWS.filter(r => r.at < 0);
+    const order = [...arrived, ...old];
+    order.forEach((r, i) => {
+      const enter = r.at >= 0 ? easeOut(seg(t, r.at, r.at + .45)) : 1;
+      r.el.style.top = (i * 150) + 'px';
+      r.el.style.opacity = enter;
+      r.el.style.transform = `translateX(${(1 - enter) * -200}px)`;
+      r.el.style.background = (r.at >= 0 && t - r.at < 1.2) ? '#e8f6fe' : '#fff';
+      r.el.style.transition = 'none';
+    });
+    pending.forEach(r => { r.el.style.opacity = 0; });
+    // shift: animate old rows downward smoothly when a new one arrives
+    order.forEach((r, i) => {
+      const newer = arrived.filter(x => x.at > (r.at >= 0 ? r.at : -99));
+      let y = 0;
+      for (const n of newer) y += 150 * (easeOut(seg(t, n.at, n.at + .45)) - 1);
+      r.el.style.top = (i * 150 + y) + 'px';
+    });
+    // highlight tap on r0 then open chat
+    const tap = seg(t, 35.4, 35.8);
+    if (t > 35.4 && t < 36.2) ROWS[0].el.style.background = '#d4ecfb';
+    const open = easeInOut(seg(t, 35.9, 36.5));
+    const ac = $('achat'); ac.style.transform = `translateX(${(1 - open) * 100}%)`;
+    typeText($('atyping'), '可以的，周六上午 10 点有空位，帮您预留？', t, 37.0, 38.6, '回复访客…');
+    pop($('am1'), t, 38.8, .4, 30);
+    pop($('s5chips'), t, 31.0);
+  }
+  // S6 features
+  if (t > 40.8 && t < 51.5) {
+    FEATS.forEach((f, i) => { const a = 41.6 + i * .9; popScale(f.el, t, a, .6); });
+    pop($('s6fine'), t, 47.5);
+  }
+  // S7 use cases
+  if (t > 50.8 && t < 56.5) {
+    USES.forEach((u, i) => {
+      popScale(u.el, t, 51.6 + i * .28, .5);
+      u.el.style.transform += ` translateY(${Math.sin(t * 1.5 + i) * 8}px)`;
+    });
+  }
+  // S8 CTA
+  if (t > 55.8) {
+    popScale($('s8logo'), t, 56.2, .7);
+    pop($('s8line'), t, 56.9);
+    popScale($('s8cta'), t, 57.6, .6);
+    pop($('s8sub'), t, 58.2);
+  }
+};
+window.render(+(new URLSearchParams(location.search).get('t') || 0));
+
+// live preview: open with ?play to watch in a browser
+if (location.search.includes('play')) {
+  const t0 = performance.now();
+  const loop = () => { window.render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+  loop();
+}
+</script>
+</body>
+</html>
