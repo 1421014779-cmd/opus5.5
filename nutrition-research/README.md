@@ -15,6 +15,8 @@
 | [05-ars-phase1-scoping.md](05-ars-phase1-scoping.md) | ARS deep-research 第二轮：超加工食品研究问题、方法设计、Checkpoint 1（已确认） |
 | [06-ars-phase2-bibliography.md](06-ars-phase2-bibliography.md) | ARS Phase 2：检索策略、带注释文献目录（30 条）、来源核实矩阵 |
 | [07-ars-phase3-synthesis.md](07-ars-phase3-synthesis.md) | ARS Phase 3：文献矩阵、五个主题综合、矛盾调和、知识缺口、Checkpoint 2 |
+| [08-ars-report.md](08-ars-report.md) | **最终报告**：超加工食品的健康证据与中国公共营养政策（Phase 6 修订稿，内部使用） |
+| [09-ars-phase5-review.md](09-ars-phase5-review.md) | ARS Phase 5：主编、伦理、Devil's Advocate 三方审查意见 |
 
 ## 证据标记
 
