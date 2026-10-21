@@ -14,6 +14,7 @@
 | [04-open-questions.md](04-open-questions.md) | 待核实事项与下一轮调研方向 |
 | [05-ars-phase1-scoping.md](05-ars-phase1-scoping.md) | ARS deep-research 第二轮：超加工食品研究问题、方法设计、Checkpoint 1（已确认） |
 | [06-ars-phase2-bibliography.md](06-ars-phase2-bibliography.md) | ARS Phase 2：检索策略、带注释文献目录（30 条）、来源核实矩阵 |
+| [07-ars-phase3-synthesis.md](07-ars-phase3-synthesis.md) | ARS Phase 3：文献矩阵、五个主题综合、矛盾调和、知识缺口、Checkpoint 2 |
 
 ## 证据标记
 

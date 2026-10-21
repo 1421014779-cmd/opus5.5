@@ -106,23 +106,27 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
    - Quality：Level IV（前瞻性队列）
    - Method weaknesses：未评估（读取范围：仅摘要）。他文批评：Benton 等的通信认为，心血管营养问题不只是加工程度的问题；作者已回复（PMID 40206220）。另据 Scarborough 的评论（媒体转述，[二手]），植物肉在这一类别中只占 0.5%，超过一半是面包和糕点
 
-7. **[作者待核] (2026). The influence of ultraprocessed food consumption on energy intake in emerging adulthood: A controlled feeding trial.**（PMID 41255123）
-   - Key Findings：在 18–25 岁全样本中，膳食条件对单餐总能量和总重量没有影响；探索性分析显示，青春期后期亚组的摄入量增加
+7. **Rego, et al. (2026). The influence of ultraprocessed food consumption on energy intake in emerging adulthood: A controlled feeding trial. *Obesity*. https://doi.org/10.1002/oby.70086**（PMID 41255123）
+   - Key Findings：
+     - 27 名 18–25 岁参与者，两期各 14 天的控制饮食（UPF 占 81% 对 0%），两种膳食的宏量营养素、纤维、添加糖、膳食质量和能量密度都已配平
+     - 全样本中，膳食条件对自助餐摄入的总能量和总重量没有影响（均 p > 0.05）
+     - 探索性分析显示，青春期后期亚组在 UPF 膳食后能量摄入增加（p = 0.03）
    - Quality：Level II
-   - 标记：作者、期刊和卷期只来自检索摘要（摘要称发表于 *Obesity*），需要核对 PubMed 记录后才能正式引用
+   - 标记：PubMed 记录的第一作者是 Rego，Wiley 的一处引用串写作 Schmall，[待核]
    - Method weaknesses：未评估（读取范围：仅摘要）
 
-8. **[作者待核] (2024/2025). Carrageenan and insulin resistance in humans: A randomised double-blind cross-over trial.**（PMID 39593091）
+8. **Wagner, et al. (2024). Carrageenan and insulin resistance in humans: A randomised double-blind cross-over trial. *BMC Medicine, 22*. https://doi.org/10.1186/s12916-024-03771-8**（PMID 39593091；PMC11590543；NCT02629705）
    - Relevance：添加剂作用机制，人体 RCT
-   - Key Findings：没有读到结果
+   - Key Findings：
+     - 20 名青年男性，口服卡拉胶（每日 2 × 250 mg）或安慰剂，各 2 周
+     - 主要结局（整体胰岛素敏感性）两组之间没有显著差异
+     - BMI 与处理存在交互作用，卡拉胶组的肠道通透性升高
    - Quality：Level II
-   - 标记：只确认了标题和 PMID，进入 Phase 3 前必须补读摘要，否则剔除
-   - Method weaknesses：未评估（读取范围：仅标题）
+   - Method weaknesses：未评估（读取范围：仅摘要）
 
-9. **[作者待核] (2024). Ultra-processed foods and food additives in gut health and disease. *Nature Reviews Gastroenterology & Hepatology*.**（PMID 38388570；s41575-024-00893-5）
-   - Key Findings：部分乳化剂、甜味剂、色素和微纳颗粒，会影响肠道菌群、肠道通透性和肠道炎症；证据主要来自动物和体外研究
+9. **Whelan, K., Bancil, A. S., Lindsay, J. O., & Chassaing, B. (2024). Ultra-processed foods and food additives in gut health and disease. *Nature Reviews Gastroenterology & Hepatology, 21*(6), 406–427. https://doi.org/10.1038/s41575-024-00893-5**（PMID 38388570）
+   - Key Findings：部分乳化剂、甜味剂、色素和微纳颗粒，会影响肠道菌群、肠道通透性和肠道炎症。高 UPF 膳食与炎症性肠病、结直肠癌、肠易激综合征相关的证据主要来自观察性研究，人体干预研究较少
    - Quality：Level V（叙述性综述）
-   - 标记：作者没有在检索结果中出现，引用前需核对 PubMed 记录
    - Method weaknesses：未评估（读取范围：仅摘要）
 
 #### 主题 2：UPF 的定义、测量与方法学争论
@@ -149,6 +153,7 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
     - Method weaknesses：不适用
 
 14. **[作者待核] (2026). Interpreting ultraprocessed food trial evidence: Evidentiary limits, reporting practices, and policy relevance.**（PMID 42269970）
+    - 相关线索：利物浦大学 2026-06-04 的新闻稿报道，Robinson、Magkos、Forde 等人在 *Science* 发表观点文章，审阅了 5 项试验。该文与本条（审阅 4 项试验）是否为同一篇，无法确认，不合并引用
     - Key Findings：
       - 审阅了 4 项 UPF 与少加工膳食的对照试验，指出对照组在多个膳食特征上同时不同，无法单独归因于“加工”
       - 批评相关评论选择性强调危害叙事
@@ -180,10 +185,10 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
     - 文件类型：指南制定程序文件
     - Quality：Level VII
 
-18. **Scrinis, G., Popkin, B. M., Corvalán, C., Nestle, M., Lawrence, M., Baker, P., Monteiro, C. A., Millett, C. [检索结果拼作 Millet], et al. (2025). [Lancet UPF Series Paper 2：遏制 UPF 生产、营销与消费的政策]. *The Lancet*.**
-    - Key Findings：提出限制营销（特别是面向儿童的营销）、正面警示标签、财税工具，以及改革国际贸易规则
+18. **Scrinis, G., Popkin, B. M., Corvalán, C., et al. (2025). Policies to halt and reverse the rise in ultra-processed food production, marketing, and consumption. *The Lancet, 406*(10520), 2685–2702. https://doi.org/10.1016/S0140-6736(25)01566-1**
+    - Key Findings：主张把政策对象从“高脂、高糖、高钠食品”扩大到影响 UPF 生产、营销和消费的整个食物系统。具体政策清单没有读到；限制营销、警示标签、贸易规则改革这几项来自二手摘要
     - Quality：Level V
-    - 标记：标题、卷期页码和完整作者名单都没有拿到；Phase 3 前需补齐，否则只引用系列首页
+    - 标记：中间作者名单不完整（Nestle、Lawrence、Baker、Monteiro、Millett 等出现在二手摘要中）
 
 19. **Baker, P., Slater, S., White, M., Wood, B., et al. (2025). Towards unified global action on ultra-processed foods: Understanding commercial determinants, countering corporate power, and mobilising a public health response. *The Lancet*. https://doi.org/10.1016/S0140-6736(25)01567-3**
     - Key Findings：认为 UPF 的扩张是由 UPF 产业日益增长的经济和政治权力推动的
@@ -272,7 +277,7 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
 ### Overall Assessment
 - **Sources Reviewed**：41
 - **Verified（纳入）**：30
-- **Flagged（纳入但需补核）**：13（条目 2、3、7、8、9、13、14、18、22、24、26、28、29）
+- **Flagged（纳入但需补核）**：11（条目 2、3、7、13、14、18、22、24、26、28、29；条目 8、9 原先也在此列，已在 Phase 3 前补齐）
 - **Rejected**：11（只有媒体报道而查不到原文，或主题不符）
 
 ### Source Quality Matrix
@@ -287,9 +292,9 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
 | 4 | Hall 2019 Cell Metab | II | ✓ | ✓ | ✓ | △ 背景文献 | △ 未读全文 | A− |
 | 5 | Aramburu 2024 Front Nutr | I | ✓ | ✓ | △ 只有 4 项研究 | ✓ | △ 未读全文 | B+ |
 | 6 | Rauber 2024 LRH-Eur | IV | ✓ | ✓ | △ 观察性 | ✓ | △ 未读全文 | B |
-| 7 | 2026 青年控制饮食试验 | II | △ 期刊待核 | △ 待核 | ✓ | ✓ | △ | B（待核） |
-| 8 | 卡拉胶 RCT | II | △ | △ | — 未读 | ✓ | △ | 待定 |
-| 9 | 2024 NRGH 添加剂综述 | V | ✓ | △ | △ 以动物证据为主 | ✓ | △ | B |
+| 7 | Rego 2026 Obesity | II | ✓ | △ 第一作者有两种写法 | △ n = 27 | ✓ | △ | B |
+| 8 | Wagner 2024 BMC Med | II | ✓ | ✓ | △ n = 20，主要结局阴性 | ✓ | △ | B |
+| 9 | Whelan 2024 NRGH | V | ✓ | △ | △ 以动物证据为主 | ✓ | △ | B |
 | 10 | Braesco 2022 EJCN | VI | ✓ | ✓ | ✓ | ✓ | △ Industry Research 标签 | B |
 | 11 | Medin 2025 FNR | I | ✓ | ✓ | ✓ | ✓ | △ | A− |
 | 12 | Louie 2026 EJCN | VII | ✓ | ✓ | — | ✓ | △ | B（观点） |
@@ -298,7 +303,7 @@ note: CNKI、万方等中文数据库在本环境中无法访问。中国证据�
 | 15 | DGA 2025–2030 | VII | ✓ 官方 | — | △ 有科学性争议 | ✓ | — | 政策原文 |
 | 16 | FDA/USDA RFI 2025 | VII | ✓ 官方 | — | — | ✓ | — | 政策原文 |
 | 17 | WHO UPF GDG | VII | ✓ 官方 | — | — | ✓ | — | 政策原文 |
-| 18 | Lancet Series Paper 2 | V | ✓ | △ 待核 | △ | ✓ | △ | B（待核） |
+| 18 | Scrinis 2025 Lancet | V | ✓ | △ 中间作者待核 | △ | ✓ | △ | B |
 | 19 | Baker 2025 Lancet | V | ✓ | ✓ | △ | ✓ | △ | B |
 | 20 | Taillie 2020 PLOS Med | IV* | ✓ | ✓ | ✓ | △ 背景文献 | △ | A−* |
 | 21 | Song 2021 PLOS Med | I | ✓ | ✓ | △ 高异质性 | ✓ | △ | A− |
