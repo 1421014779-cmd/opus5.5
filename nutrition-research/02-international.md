@@ -5,7 +5,7 @@
 - USDA 与 HHS 于 **2026-01-07** 发布，官方网站 realfood.gov，采用"倒金字塔"图示。[二手]
 - 要点：[二手]
   - 从单一营养素目标转向整体膳食模式，强调完整食物和少加工食物
-  - **首次明确建议避免高度加工 / 超加工食品**
+  - **首次明确建议避免高度加工食品**。HHS 情况说明的原话是 “avoid highly processed packaged, prepared, ready-to-eat, or other foods that are salty or sweet”；正文用 “highly processed”，不用 “ultra-processed”（[HHS](https://www.hhs.gov/press-room/fact-sheet-historic-reset-federal-nutrition-policy.html)）
   - 蛋白质按体重给出推荐量，不再按份数；多数成年人已满足生理需要，额外摄入主要在配合力量训练时有益
   - 鼓励全脂乳制品；健康脂肪来自海产品、蛋、坚果、橄榄、牛油果
   - 饱和脂肪上限未变，但文本又提到黄油、牛油等，被批评前后矛盾

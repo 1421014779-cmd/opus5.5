@@ -13,6 +13,7 @@
 | [03-frontier-topics.md](03-frontier-topics.md) | 前沿专题：超加工食品、GLP-1 时代的营养管理、限时进食、精准营养 |
 | [04-open-questions.md](04-open-questions.md) | 待核实事项与下一轮调研方向 |
 | [05-ars-phase1-scoping.md](05-ars-phase1-scoping.md) | ARS deep-research 第二轮：超加工食品研究问题、方法设计、Checkpoint 1（已确认） |
+| [06-ars-phase2-bibliography.md](06-ars-phase2-bibliography.md) | ARS Phase 2：检索策略、带注释文献目录（30 条）、来源核实矩阵 |
 
 ## 证据标记
 
