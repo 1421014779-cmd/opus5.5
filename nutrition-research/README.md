@@ -12,6 +12,7 @@
 | [02-international.md](02-international.md) | 国际：美国 DGA 2025–2030、WHO 指南（GLP-1、低钠盐、健康税）、EAT-Lancet 2.0 |
 | [03-frontier-topics.md](03-frontier-topics.md) | 前沿专题：超加工食品、GLP-1 时代的营养管理、限时进食、精准营养 |
 | [04-open-questions.md](04-open-questions.md) | 待核实事项与下一轮调研方向 |
+| [05-ars-phase1-scoping.md](05-ars-phase1-scoping.md) | ARS deep-research 第二轮：研究问题、方法设计、Checkpoint 1（待确认） |
 
 ## 证据标记
 
