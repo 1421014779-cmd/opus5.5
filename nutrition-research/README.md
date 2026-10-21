@@ -17,6 +17,7 @@
 | [07-ars-phase3-synthesis.md](07-ars-phase3-synthesis.md) | ARS Phase 3：文献矩阵、五个主题综合、矛盾调和、知识缺口、Checkpoint 2 |
 | [08-ars-report.md](08-ars-report.md) | **最终报告**：超加工食品的健康证据与中国公共营养政策（Phase 6 第 2 轮修订稿，内部使用） |
 | [09-ars-phase5-review.md](09-ars-phase5-review.md) | ARS Phase 5：补做的定稿前自查，以及按完整角色定义重做的主编、伦理、Devil's Advocate 审查 |
+| [10-plain-summary.md](10-plain-summary.md) | **一页看懂**：用大白话总结超加工食品调研的结论和建议 |
 
 ## 证据标记
 

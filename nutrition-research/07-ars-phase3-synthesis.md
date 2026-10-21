@@ -131,38 +131,25 @@ SQ1 = UPF 与健康结局；SQ2 = 国际政策回应；SQ3 = 中国的契合与�
 | #2、#13：证据已足以支持政策行动 | #14：试验证据被选择性解读 | **不可调和（价值判断）**：分歧在于证据门槛设在哪里，属于预防原则与证据确定性之间的权衡，需要作者自己判断 |
 | #6 Rauber：植物基 UPF 也增加 CVD 风险 | Scarborough 的评论（[二手]）：植物肉只占这一类别的 0.5% | **可调和**：结论适用于面包和糕点为主的植物基 UPF，不能推论到植物肉 |
 
-#### Cross-Paper Tension Inventory
+#### 文献之间的矛盾清单（Cross-Paper Tension Inventory）
 
-```yaml
-cross_paper_tensions:
-  - pair: ["#1 Lane 2024", "#12 Louie 2026"]
-    pair_assessment: substantive_methodological
-    resolution_status: unresolved
-    evidence_pointers: ["#1 abstract: class I–II grading", "#12 abstract: retrospective coding misclassification"]
-    scholar_confirmation: pending
-  - pair: ["#4 Hall 2019", "#7 Rego 2026"]
-    pair_assessment: design_difference
-    resolution_status: reconciled_conditional
-    resolution_pointer: "#7 额外配平了能量密度；人群为 18–25 岁；n = 27"
-    scholar_confirmation: pending
-  - pair: ["#3 Dicken 2025", "#14 Interpreting UPF trial evidence 2026"]
-    pair_assessment: interpretation_dispute
-    resolution_status: partially_reconciled
-    resolution_pointer: "效应方向一致，分歧在归因和意义"
-    scholar_confirmation: pending
-  - pair: ["#13 Khandpur 2026", "#10 Braesco 2022"]
-    pair_assessment: substantive_methodological
-    resolution_status: unresolved
-    evidence_pointers: ["#13 abstract: four critiques answered", "#10 abstract: κ 0.32–0.34"]
-    scholar_confirmation: pending
-  - pair: ["#21 Song 2021", "#23 Colombia Ley 2277"]
-    pair_assessment: different_policy_anchor
-    resolution_status: not_a_contradiction
-    resolution_pointer: "一个是营养素锚定标签的效果证据，另一个是尚无评估的加工锚定税"
-    scholar_confirmation: pending
-```
+ARS 要求作者逐组确认下面的判断。用户在 2026-10-21 回复“全是英文的我看不懂，全权交给你”，把确认交给了 AI。以下“确认结果”是 AI 代为作出的判断，不是用户本人逐条审阅的结论。
 
-**Coverage Note**：语料共 30 篇；考虑了 5 组候选配对，依据是研究同一子问题且结论方向相反，或者有直接的批评回应关系。这是有限范围的提示性扫描，不是完整的两两矛盾检测：本节没有列出的跨组配对可能也存在矛盾，不能声称不存在。每条 `resolution_pointer` 需要你确认，你也可以补充其他配对。
+| # | 互相矛盾的两篇 | 矛盾在哪里 | 判断 | 确认结果 | 对报告的影响 |
+|---|---|---|---|---|---|
+| 1 | #1 Lane 2024（伞形综述） 对 #12 Louie 2026（观点文章） | Lane 认为大量研究一致显示超加工食品有害；Louie 认为这些研究的饮食数据本来就分不清加工程度，合并起来不可靠 | 未解决：要看全文才能判断测量误差会让结果偏大还是偏小 | 确认“未解决” | 报告只把 Lane 的结果当作“风险标志”，不当作“加工导致疾病”的证据（3.2 节小结） |
+| 2 | #4 Hall 2019 对 #7 Rego 2026（都是控制饮食试验） | Hall 发现吃超加工食品每天多吃约 500 千卡；Rego 没有重复出这个结果 | 有条件调和：Rego 额外配平了“能量密度”，说明多吃可能主要来自能量密度，而不是“加工”本身。但这一点只来自摘要 | 确认“有条件调和”，条件是之后读 Rego 全文核实 | 报告 4.1 节已写明“这一判断目前只有摘要支持” |
+| 3 | #3 Dicken 2025（随机试验） 对 #14 2026 年批判性综述 | Dicken 发现少加工饮食多减约 1 公斤；批评者认为差别太小，而且没法证明是“加工”造成的 | 部分调和：双方都认可“少加工饮食减重更多”这个方向，分歧在于这个差别有多大意义、能不能归因于加工 | 确认“部分调和” | 报告 3.2 节同时写了结果和批评 |
+| 4 | #13 Khandpur 2026（支持 NOVA） 对 #10 Braesco 2022（质疑 NOVA） | Khandpur 认为 NOVA 分类可用；Braesco 发现专家按 NOVA 分类时意见很不一致 | 未解决：属于学界尚无共识的问题 | 确认“未解决” | 这是报告建议“暂不把 NOVA 写进法规”的主要原因之一（4.2 节第 4 条） |
+| 5 | #21 Song 2021（警示标签研究） 对 #23 哥伦比亚超加工食品税 | 表面上一个按营养素、一个按加工程度 | 不是矛盾：两者回答的是不同问题，一个是“已证明有效的工具”，一个是“还没有评估的新工具” | 确认“不是矛盾” | 报告 3.4 节分别写成发现 6 和发现 7 |
+
+**范围说明**：语料共 30 篇，只检查了这 5 组。选这 5 组的依据是：研究同一个子问题而结论相反，或者有直接的批评与回应关系。这不是对所有文献两两比对的完整检查，没有列出的配对之间也可能存在矛盾。
+
+**确认记录**：
+
+| 项目 | 确认方式 | 用户原话 |
+| --- | --- | --- |
+| 以上 5 组判断 | 用户全权委托 AI 确认 | “全是英文的我看不懂，全权交给你” |
 
 ### Knowledge Gaps
 1. **中国近期的全国 UPF 摄入数据缺失**（数据缺口）。儿童数据止于 2011 年，成人只有广东到 2022 年的数据。政策启示因此只能建立在“趋势上升”的判断上，无法估计目前的全国水平
